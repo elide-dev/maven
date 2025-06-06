@@ -28,8 +28,6 @@ kotlin {
 dependencies {
     implementation(libs.plexus.compiler.api)
     implementation(libs.javax.inject)
-    implementation(libs.sisu.plexus)
-    implementation(libs.sisu.inject)
     testImplementation(kotlin("test"))
 }
 
