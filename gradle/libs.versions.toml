@@ -1,0 +1,12 @@
+[versions]
+plexus-compiler = "2.15.0"
+javax-inject = "1"
+sisu = "0.9.0.M4"
+
+[libraries]
+plexus-compiler-api = { module = "org.codehaus.plexus:plexus-compiler-api", version.ref = "plexus-compiler" }
+javax-inject = { module = "javax.inject:javax.inject", version.ref = "javax-inject" }
+sisu-plexus = { module = "org.eclipse.sisu:org.eclipse.sisu.plexus", version.ref = "sisu" }
+sisu-inject = { module = "org.eclipse.sisu:org.eclipse.sisu.inject", version.ref = "sisu" }
+
+[plugins]
