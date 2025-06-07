@@ -6,6 +6,7 @@ import org.codehaus.plexus.util.cli.CommandLineUtils
 import org.codehaus.plexus.util.cli.Commandline
 import java.io.File
 import java.io.IOException
+import java.util.LinkedList
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -29,16 +30,25 @@ open class ElideJavacCompiler() : AbstractCompiler(
         if(sources.isEmpty()) return CompilerResult()
         logCompiling(sources, config)
         val executable = getElideExecutable(config)
-        val args = buildElideArgs(config, sources)
+        val args = buildList<String> {
+            addAll(buildElideArgs(config, sources))
+            config.maxmem?.ifEmpty { null }?.let { add("-J-Xmx$this") }
+            config.meminitial?.ifEmpty { null }?.let { add("-J-Xms$this") }
+
+            config.customCompilerArgumentsAsMap.entries
+                .filter { it.value != null && it.key.startsWith("-J") }
+                .ifEmpty { null }
+                ?.forEach { add("${it.key}=${it.value}") }
+        }
+
         val cli = Commandline()
         cli.setWorkingDirectory(config.workingDirectory.absolutePath)
         cli.executable = executable
-        cli.addArguments(args)
-        config.maxmem?.apply { if(isNotEmpty()) "-J-Xmx$this" }
-        config.meminitial?.apply { if(isNotEmpty()) "-J-Xms$this" }
-        config.getCustomCompilerArgumentsAsMap().keys
+        config.customCompilerArgumentsAsMap.keys
             .filter { it != null && it.startsWith("-J") }
             .apply { if(isNotEmpty()) cli.addArguments(toTypedArray()) }
+
+        cli.addArguments(args.toTypedArray())
         val out = CommandLineUtils.StringStreamConsumer()
         var returnCode: Int
         val messages: List<CompilerMessage>
@@ -54,33 +64,33 @@ open class ElideJavacCompiler() : AbstractCompiler(
     }
 
     private fun getElideExecutable(config: CompilerConfiguration): String {
-        if(config.executable != null && config.executable.isNotBlank()) return config.executable
+        if (config.executable != null && config.executable.isNotBlank()) return config.executable
         return "elide"
     }
 
     override fun createCommandLine(config: CompilerConfiguration): Array<String> {
-        return buildElideArgs(config, getSourceFiles(config))
+        return buildElideArgs(config, getSourceFiles(config)).toTypedArray()
     }
 
-    private fun buildElideArgs(config: CompilerConfiguration, sources: Array<String>): Array<String> {
-        val args: MutableList<String> = ArrayList<String>()
+    private fun buildElideArgs(config: CompilerConfiguration, sources: Array<String>): MutableList<String> {
+        val args: MutableList<String> = LinkedList<String>()
         args.add("javac")
         args.add("--")
         val destinationDir = File(config.outputLocation)
         args.add("-d")
         args.add(destinationDir.absolutePath)
-        config.classpathEntries?.apply { if(isNotEmpty()) {
+        config.classpathEntries?.ifEmpty { null }?.let {
             args.add("-classpath")
-            args.add(getPathString(this))
-        } }
-        config.modulepathEntries?.apply { if(isNotEmpty()) {
+            args.add(getPathString(it))
+        }
+        config.modulepathEntries?.ifEmpty { null }?.let {
             args.add("--module-path")
-            args.add(getPathString(this))
-        } }
-        config.sourceLocations?.apply { if(isNotEmpty()) {
+            args.add(getPathString(it))
+        }
+        config.sourceLocations?.ifEmpty { null }?.let {
             args.add("-sourcepath")
-            args.add(getPathString(this))
-        } }
+            args.add(getPathString(it))
+        }
         args.addAll(listOf(*sources))
 
         config.generatedSourcesDirectory.apply {
@@ -93,55 +103,55 @@ open class ElideJavacCompiler() : AbstractCompiler(
             args.add("-processor")
             args.add(indices.joinToString(",") { this[it] })
         }
-        config.processorPathEntries?.apply { if(isNotEmpty()) {
+        config.processorPathEntries?.ifEmpty { null }?.let {
             args.add("-processorpath")
-            args.add(getPathString(this))
-        } }
-        config.processorModulePathEntries?.apply { if(isNotEmpty()) {
+            args.add(getPathString(it))
+        }
+        config.processorModulePathEntries?.ifEmpty { null }?.let {
             args.add("--processor-module-path")
-            args.add(getPathString(this))
-        } }
-        if(config.isOptimize) args.add("-O")
-        if(config.isDebug) {
-            if(config.debugLevel?.isNotEmpty() ?: false) {
+            args.add(getPathString(it))
+        }
+        if (config.isOptimize) args.add("-O")
+        if (config.isDebug) {
+            if (config.debugLevel?.isNotEmpty() == true) {
                 args.add("-g:" + config.debugLevel)
             } else {
                 args.add("-g")
             }
         }
-        if(config.isVerbose) args.add("-verbose")
-        if(config.isParameters) args.add("-parameters")
-        if(config.isEnablePreview) args.add("--enable-preview")
+        if (config.isVerbose) args.add("-verbose")
+        if (config.isParameters) args.add("-parameters")
+        if (config.isEnablePreview) args.add("--enable-preview")
         config.implicitOption?.apply { args.add("-implicit:$this") }
-        if(config.isShowDeprecation) {
+        if (config.isShowDeprecation) {
             args.add("-deprecation")
             config.isShowWarnings = true
         }
-        if(!config.isShowWarnings) {
+        if (!config.isShowWarnings) {
             args.add("-nowarn")
         } else {
             val warnings = config.warnings
-            if(config.isShowLint) {
-                if(warnings.isNotEmpty()) {
+            if (config.isShowLint) {
+                if (warnings.isNotEmpty()) {
                     args.add("-Xlint:$warnings")
                 } else {
                     args.add("-Xlint")
                 }
             }
         }
-        if(config.isFailOnWarning) args.add("-Werror")
-        if(config.releaseVersion?.isNotEmpty() ?: false) {
+        if (config.isFailOnWarning) args.add("-Werror")
+        if (config.releaseVersion?.isNotEmpty() == true) {
             args.add("--release")
             args.add(config.releaseVersion)
         } else {
-            if(config.targetVersion?.isEmpty() ?: true) {
+            if (config.targetVersion?.isEmpty() == true) {
                 args.add("-target")
                 args.add("1.1")
             } else {
                 args.add("-target")
                 args.add(config.targetVersion)
             }
-            if(config.sourceVersion?.isEmpty() ?: true) {
+            if (config.sourceVersion?.isEmpty() == true) {
                 args.add("-source")
                 args.add("1.3")
             } else {
@@ -149,20 +159,20 @@ open class ElideJavacCompiler() : AbstractCompiler(
                 args.add(config.sourceVersion)
             }
         }
-        config.sourceEncoding?.apply { if(isNotEmpty()) {
+        config.sourceEncoding?.ifEmpty { null }?.let {
             args.add("-encoding")
-            args.add(this)
-        } }
-        config.moduleVersion?.apply { if(isNotEmpty()) {
-            args.add("--module-version")
-            args.add(this)
-        } }
-        config.customCompilerArgumentsEntries?.forEach { (key, value) ->
-            if(key.isEmpty() || key.startsWith("-J")) return@forEach
-            args.add(key)
-            if(value.isNotEmpty()) args.add(value)
+            args.add(it)
         }
-        return args.toTypedArray()
+        config.moduleVersion?.ifEmpty { null }?.let {
+            args.add("--module-version")
+            args.add(it)
+        }
+        config.customCompilerArgumentsEntries?.forEach { (key, value) ->
+            if (key.isEmpty() || key.startsWith("-J")) return@forEach
+            args.add(key)
+            if (value.isNotEmpty()) args.add(value)
+        }
+        return args
     }
 
     @Throws(IOException::class)
