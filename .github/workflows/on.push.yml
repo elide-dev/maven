@@ -1,0 +1,19 @@
+name: "CI"
+
+"on":
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: "read"
+
+jobs:
+  build:
+    name: "Build"
+    uses: ./.github/workflows/job.build.yml
+    secrets: inherit
+    permissions:
+      contents: "read"
+    with:
+      runner: "ubuntu-latest"
