@@ -24,13 +24,3 @@ code to build, and the `pom.xml` is configured to use Elide.
         </plugins>
     </build>
 ```
-
-Properties needed:
-```xml
-    <properties>
-        <maven.compiler.executable>/path/to/elide</maven.compiler.executable>
-        <maven.compiler.source>24</maven.compiler.source>
-        <maven.compiler.target>24</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-```
