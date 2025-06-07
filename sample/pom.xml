@@ -5,7 +5,6 @@
     <version>1</version>
 
     <properties>
-        <maven.compiler.executable>/home/sam/bin/elide</maven.compiler.executable>
         <maven.compiler.source>24</maven.compiler.source>
         <maven.compiler.target>24</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

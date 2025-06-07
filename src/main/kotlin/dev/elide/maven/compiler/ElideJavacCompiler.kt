@@ -1,3 +1,15 @@
+/*
+ * Copyright (c) 2024-2025 Elide Technologies, Inc.
+ *
+ * Licensed under the MIT license (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ *
+ *   https://opensource.org/license/mit/
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under the License.
+ */
 package dev.elide.maven.compiler
 
 import org.codehaus.plexus.compiler.*
@@ -9,13 +21,18 @@ import java.io.IOException
 import java.util.LinkedList
 import javax.inject.Named
 import javax.inject.Singleton
+import kotlin.io.path.absolutePathString
 
 /**
- * @author Lauri "datafox" Heino
+ * Implements a Java compiler bridge from Maven to Elide.
+ *
+ * @author Lauri Heino <datafox>
+ * @author Sam Gammon <sgammon>
+ * @since 1.0.0
  */
-@Named("elide")
+@Named(ELIDE_COMPILER)
 @Singleton
-open class ElideJavacCompiler() : AbstractCompiler(
+public open class ElideJavacCompiler() : AbstractCompiler(
     CompilerOutputStyle.ONE_OUTPUT_FILE_PER_INPUT_FILE,
     ".java",
     ".class",
@@ -63,10 +80,10 @@ open class ElideJavacCompiler() : AbstractCompiler(
         return CompilerResult(returnCode == 0, messages)
     }
 
-    private fun getElideExecutable(config: CompilerConfiguration): String {
-        if (config.executable != null && config.executable.isNotBlank()) return config.executable
-        return "elide"
-    }
+    private fun getElideExecutable(config: CompilerConfiguration): String = when (val executable = config.executable) {
+        null -> ElideLocator.locate()?.absolutePathString()
+        else -> executable
+    } ?: "elide"
 
     override fun createCommandLine(config: CompilerConfiguration): Array<String> {
         return buildElideArgs(config, getSourceFiles(config)).toTypedArray()
@@ -176,7 +193,7 @@ open class ElideJavacCompiler() : AbstractCompiler(
     }
 
     @Throws(IOException::class)
-    fun parseOutput(exitCode: Int, input: List<String>): List<CompilerMessage> {
+    private fun parseOutput(exitCode: Int, input: List<String>): List<CompilerMessage> {
         //very lazy for now
         val kind = if(exitCode == 0) CompilerMessage.Kind.NOTE else CompilerMessage.Kind.ERROR
         return input.map { CompilerMessage(it, kind) }
