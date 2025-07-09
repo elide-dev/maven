@@ -44,7 +44,7 @@ jobs:
       - name: "Setup: Elide"
         uses: elide-dev/setup-elide@990b915b2974a70e7654acb1303607b4cd1d3538 # v2.0.0
       - name: "Build: Plugin"
-        run: ./gradlew build publishToMavenLocal
+        run: ./gradlew elide-plexus-compilers:build elide-plexus-compilers:publishToMavenLocal
       - name: "Test: Plugin"
         working-directory: sample
         run: ./mvnw clean package

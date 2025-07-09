@@ -1,1 +1,3 @@
-rootProject.name = "elide-plexus-compilers"
+rootProject.name = "elide-maven"
+
+include("plexus-compilers")
