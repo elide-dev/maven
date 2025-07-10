@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 11
+Implementation-Title: elide-kotlin-maven-plugin
+Implementation-Vendor: Elide Technologies Inc.
+Implementation-Version: 1.0.0
+
