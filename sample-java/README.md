@@ -9,12 +9,12 @@ code to build, and the `pom.xml` is configured to use Elide.
     <plugins>
         <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.13.0</version>
+            <version>3.14.0</version>
             <dependencies>
                 <dependency>
                     <groupId>dev.elide</groupId>
                     <artifactId>elide-plexus-compilers</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
+                    <version>1.0.0</version>
                 </dependency>
             </dependencies>
             <configuration>

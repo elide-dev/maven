@@ -13,7 +13,7 @@ Kotlin plugin, so configure your Kotlin project like normal, but use `dev.elide:
         <plugin>
             <groupId>dev.elide</groupId>
             <artifactId>elide-kotlin-maven-plugin</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0</version>
             <executions>
                 <execution>
                     <id>compile</id>

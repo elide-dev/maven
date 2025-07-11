@@ -6,13 +6,23 @@
 
     <groupId>dev.elide</groupId>
     <artifactId>elide-kotlin-maven-plugin</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>maven-plugin</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
+
+        <compilerVersion>1.0.0</compilerVersion>
+        <kotlinVersion>2.2.0</kotlinVersion>
+        <injectVersion>1</injectVersion>
+        <plexusVersion>2.15.0</plexusVersion>
+        <junitVersion>5.11.1</junitVersion>
+        <mavenVersion>3.9.10</mavenVersion>
+        <mavenToolsVersion>3.15.1</mavenToolsVersion>
+        <mavenTestPluginVersion>2.22.2</mavenTestPluginVersion>
+        <mavenCompilerVersion>3.14.0</mavenCompilerVersion>
     </properties>
 
     <repositories>
@@ -27,7 +37,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.15.1</version>
+                <version>${mavenToolsVersion}</version>
                 <executions>
                     <execution>
                         <id>default-descriptor</id>
@@ -48,7 +58,7 @@
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
-                <version>2.2.0</version>
+                <version>${kotlinVersion}</version>
                 <executions>
                     <execution>
                         <id>compile</id>
@@ -79,12 +89,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.14.0</version>
+                <version>${mavenCompilerVersion}</version>
                 <dependencies>
                     <dependency>
                         <groupId>dev.elide</groupId>
                         <artifactId>elide-plexus-compilers</artifactId>
-                        <version>1.0.0-SNAPSHOT</version>
+                        <version>${compilerVersion}</version>
                     </dependency>
                 </dependencies>
                 <configuration>
@@ -118,11 +128,11 @@
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>${mavenTestPluginVersion}</version>
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>${mavenTestPluginVersion}</version>
             </plugin>
         </plugins>
     </build>
@@ -131,35 +141,35 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test-junit5</artifactId>
-            <version>2.2.0</version>
+            <version>${kotlinVersion}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.11.1</version>
+            <version>${junitVersion}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
-            <version>2.2.0</version>
+            <version>${kotlinVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-maven-plugin</artifactId>
-            <version>2.2.0</version>
+            <version>${kotlinVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>3.9.10</version>
+            <version>${mavenVersion}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
-            <version>3.9.10</version>
+            <version>${mavenVersion}</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
@@ -171,39 +181,39 @@
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
-            <version>3.15.1</version>
+            <version>${mavenToolsVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-build-tools-api</artifactId>
-            <version>2.2.0</version>
+            <version>${kotlinVersion}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-build-tools-impl</artifactId>
-            <version>2.2.0</version>
+            <version>${kotlinVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-compiler-embeddable</artifactId>
-            <version>2.2.0</version>
+            <version>${kotlinVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-scripting-compiler-embeddable</artifactId>
-            <version>2.2.0</version>
+            <version>${kotlinVersion}</version>
         </dependency>
         <dependency>
             <groupId>dev.elide</groupId>
             <artifactId>elide-plexus-compilers</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${compilerVersion}</version>
         </dependency>
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
-            <version>1</version>
+            <version>${injectVersion}</version>
         </dependency>
     </dependencies>
 </project>

@@ -6,12 +6,18 @@
 
     <groupId>dev.elide</groupId>
     <artifactId>elide-plexus-compilers</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
+
+        <kotlinVersion>2.2.0</kotlinVersion>
+        <injectVersion>1</injectVersion>
+        <plexusVersion>2.15.0</plexusVersion>
+        <junitVersion>5.11.1</junitVersion>
+        <mavenTestPluginVersion>2.22.2</mavenTestPluginVersion>
     </properties>
 
     <repositories>
@@ -28,16 +34,16 @@
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
-                <version>2.2.0</version>
+                <version>${kotlinVersion}</version>
                 <extensions>true</extensions>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>${mavenTestPluginVersion}</version>
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>${mavenTestPluginVersion}</version>
             </plugin>
         </plugins>
     </build>
@@ -46,29 +52,29 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test-junit5</artifactId>
-            <version>2.2.0</version>
+            <version>${kotlinVersion}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.11.1</version>
+            <version>${junitVersion}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
-            <version>2.2.0</version>
+            <version>${kotlinVersion}</version>
         </dependency>
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
-            <version>1</version>
+            <version>${injectVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.plexus</groupId>
             <artifactId>plexus-compiler-api</artifactId>
-            <version>2.15.0</version>
+            <version>${plexusVersion}</version>
         </dependency>
     </dependencies>
 </project>

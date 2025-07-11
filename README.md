@@ -30,7 +30,7 @@ Configuring Elide as your `javac` compiler:
                 <dependency>
                     <groupId>dev.elide</groupId>
                     <artifactId>elide-plexus-compilers</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
+                    <version>1.0.0</version>
                 </dependency>
             </dependencies>
             <configuration>
@@ -59,7 +59,7 @@ the plugin coordinates:
         <plugin>
             <groupId>dev.elide</groupId>
             <artifactId>elide-kotlin-maven-plugin</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0</version>
             <executions>
                 <execution>
                     <id>compile</id>
