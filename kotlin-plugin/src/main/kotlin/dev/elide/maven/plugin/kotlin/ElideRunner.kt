@@ -63,9 +63,9 @@ object ElideRunner {
                 )
             }
         } catch (e: CommandLineException) {
-            throw CompilerException("Error while executing Elide javac compiler.", e)
+            throw CompilerException("Error while executing Elide $compiler compiler.", e)
         } catch (e: IOException) {
-            throw CompilerException("Error while executing Elide javac compiler.", e)
+            throw CompilerException("Error while executing Elide $compiler compiler.", e)
         }
         return if (returnCode == 0) ExitCode.OK else ExitCode.COMPILATION_ERROR
     }
