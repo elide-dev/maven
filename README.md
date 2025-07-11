@@ -25,7 +25,7 @@ Configuring Elide as your `javac` compiler:
     <plugins>
         <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.13.0</version>
+            <version>3.14.0</version>
             <dependencies>
                 <dependency>
                     <groupId>dev.elide</groupId>
