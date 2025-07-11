@@ -1,6 +1,6 @@
 # Elide Maven Plugin
 
-This plugin can be consumed in a Maven project to use [Elide](https://elide.dev).
+This plugin can be consumed in a Maven project to use [Elide](https://elide.dev) for compiling Java and Kotlin sources.
 
 > [!WARNING]
 > This plugin is currently under development.
@@ -9,18 +9,18 @@ This plugin can be consumed in a Maven project to use [Elide](https://elide.dev)
 
 - [x] Swap out `javac ...` for `elide javac -- ...`
 - [x] Supports explicit path to `elide`
-- [ ] Resolve `elide` via the `PATH`
-- [ ] Swap out `kotlinc ...` for `elide kotlinc -- ...`
+- [x] Resolve `elide` via the `PATH`
+- [x] Swap out `kotlinc ...` for `elide kotlinc -- ...`
 - [ ] Usability of Elide as a Maven toolchain
 
 ## Usage
 
+### Java
+
 Configuring Elide as your `javac` compiler:
 
 **`pom.xml`**
-
 ```xml
-
 <build>
     <plugins>
         <plugin>
@@ -41,17 +41,52 @@ Configuring Elide as your `javac` compiler:
 </build>
 ```
 
-Properties needed:
+> [!TIP]
+> See the [Java sample project](java-sample) for a usage example. Elide also provides
+> a [Gradle plugin](https://github.com/elide-dev/gradle).
 
+### Kotlin
+
+Configuring the Elide Kotlin plugin is done the exact same way as configuring the Kotlin Maven plugin, just replacing 
+the `groupId` and `artifactId`:
+
+**`pom.xml`**
 ```xml
+<build>
+    <sourceDirectory>src/main/kotlin</sourceDirectory>
+    <testSourceDirectory>src/test/kotlin</testSourceDirectory>
+    <plugins>
+        <plugin>
+            <groupId>dev.elide</groupId>
+            <artifactId>elide-kotlin-maven-plugin</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <executions>
+                <execution>
+                    <id>compile</id>
+                    <goals>
+                        <goal>compile</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>test-compile</id>
+                    <goals>
+                        <goal>test-compile</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 
-<properties>
-    <maven.compiler.source>24</maven.compiler.source>
-    <maven.compiler.target>24</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-</properties>
+<dependencies>
+    <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-stdlib</artifactId>
+        <version>2.2.0</version>
+    </dependency>
+</dependencies>
 ```
 
 > [!TIP]
-> See the [sample project](java-sample) for a usage example. Elide also provides
+> See the [Kotlin sample project](kotlin-sample) for a usage example. Elide also provides
 > a [Gradle plugin](https://github.com/elide-dev/gradle).
