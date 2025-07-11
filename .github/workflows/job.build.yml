@@ -43,8 +43,11 @@ jobs:
           java-version: "24"
       - name: "Setup: Elide"
         uses: elide-dev/setup-elide@990b915b2974a70e7654acb1303607b4cd1d3538 # v2.0.0
-      - name: "Build: Plugin"
-        run: ./gradlew elide-plexus-compilers:build elide-plexus-compilers:publishToMavenLocal
-      - name: "Test: Plugin"
-        working-directory: sample
-        run: ./mvnw clean package
+      - name: "Build: Java Compiler"
+        run: ./mvnw install -pl plexus-compilers
+      - name: "Build: Kotlin Plugin"
+        run: ./mvnw install -pl kotlin-plugin
+      - name: "Test: Java Compiler"
+        run: ./mvnw clean package -pl java-sample
+      - name: "Test: Kotlin Plugin"
+        run: ./mvnw clean package -pl kotlin-sample

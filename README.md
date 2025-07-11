@@ -18,35 +18,40 @@ This plugin can be consumed in a Maven project to use [Elide](https://elide.dev)
 Configuring Elide as your `javac` compiler:
 
 **`pom.xml`**
+
 ```xml
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>dev.elide</groupId>
-                        <artifactId>elide-plexus-compilers</artifactId>
-                        <version>1.0.0-SNAPSHOT</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <compilerId>elide</compilerId>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+
+<build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.13.0</version>
+            <dependencies>
+                <dependency>
+                    <groupId>dev.elide</groupId>
+                    <artifactId>elide-plexus-compilers</artifactId>
+                    <version>1.0.0-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
+            <configuration>
+                <compilerId>elide</compilerId>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 ```
 
 Properties needed:
+
 ```xml
-    <properties>
-        <maven.compiler.source>24</maven.compiler.source>
-        <maven.compiler.target>24</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+
+<properties>
+    <maven.compiler.source>24</maven.compiler.source>
+    <maven.compiler.target>24</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
 ```
 
 > [!TIP]
-> See the [sample project](./sample) for a usage example. Elide also provides a [Gradle plugin](https://github.com/elide-dev/gradle).
+> See the [sample project](java-sample) for a usage example. Elide also provides
+> a [Gradle plugin](https://github.com/elide-dev/gradle).

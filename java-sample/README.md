@@ -1,9 +1,10 @@
-## Elide Maven Plugin: Sample Project
+## Elide Maven Java Compiler: Sample Project
 
 This project demonstrates use of Elide as a replacement for `javac` within a Maven project. There is some Java source
 code to build, and the `pom.xml` is configured to use Elide.
 
 **`pom.xml`**
+
 ```xml
     <build>
         <plugins>
