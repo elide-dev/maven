@@ -11,7 +11,7 @@
     <modules>
         <module>plexus-compilers</module>
         <module>kotlin-plugin</module>
-        <module>java-sample</module>
-        <module>kotlin-sample</module>
+        <module>sample-java</module>
+        <module>sample-kotlin</module>
     </modules>
 </project>

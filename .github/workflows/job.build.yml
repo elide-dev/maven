@@ -48,6 +48,6 @@ jobs:
       - name: "Build: Kotlin Plugin"
         run: ./mvnw install -pl kotlin-plugin
       - name: "Test: Java Compiler"
-        run: ./mvnw clean package -pl java-sample
+        run: ./mvnw clean package -pl sample-java
       - name: "Test: Kotlin Plugin"
-        run: ./mvnw clean package -pl kotlin-sample
+        run: ./mvnw clean package -pl sample-kotlin

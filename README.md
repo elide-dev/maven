@@ -42,13 +42,13 @@ Configuring Elide as your `javac` compiler:
 ```
 
 > [!TIP]
-> See the [Java sample project](java-sample) for a usage example. Elide also provides
+> See the [Java sample project](sample-java) for a usage example. Elide also provides
 > a [Gradle plugin](https://github.com/elide-dev/gradle).
 
 ### Kotlin
 
 Configuring the Elide Kotlin plugin is done the exact same way as configuring the Kotlin Maven plugin, just replacing 
-the `groupId` and `artifactId`:
+the plugin coordinates:
 
 **`pom.xml`**
 ```xml
@@ -88,5 +88,5 @@ the `groupId` and `artifactId`:
 ```
 
 > [!TIP]
-> See the [Kotlin sample project](kotlin-sample) for a usage example. Elide also provides
+> See the [Kotlin sample project](sample-kotlin) for a usage example. Elide also provides
 > a [Gradle plugin](https://github.com/elide-dev/gradle).
