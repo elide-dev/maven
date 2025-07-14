@@ -37,14 +37,26 @@ object ArgumentParser {
         val list: MutableList<String> = LinkedList()
         list.add(compiler)
         list.add("--")
-        arguments::class.java.fields.forEach { list.parseArgument(arguments, it) }
+        getAllFields(arguments::class.java).forEach { list.parseArgument(arguments, it) }
         if (java && "-d" !in list) {
             list.add("-d")
             list.add(project.build.outputDirectory)
         }
         list.add("--")
         list.addAll(arguments.freeArgs)
+        println(list.joinToString(" "))
         return list.toTypedArray()
+    }
+
+    private fun <A : CommonCompilerArguments> getAllFields(type: Class<out A>): List<Field> {
+        var type: Class<out CommonCompilerArguments> = type
+        val fields: MutableList<Field> = LinkedList()
+        fields.addAll(type.declaredFields.filter { it.trySetAccessible() && it.isAnnotationPresent(Argument::class.java) })
+        while(type != CommonCompilerArguments::class.java) {
+            type = type.superclass as Class<out CommonCompilerArguments>
+            fields.addAll(type.declaredFields.filter { it.trySetAccessible() && it.isAnnotationPresent(Argument::class.java) })
+        }
+        return fields
     }
 
     private fun <A : CommonCompilerArguments> MutableList<String>.parseArgument(
@@ -56,14 +68,12 @@ object ArgumentParser {
         when (element) {
             is Boolean -> if (element) add(argument.value)
             is String -> {
-                add(argument.value)
-                add(element)
+                add(argument.value + "=" + element)
             }
             is Array<*> -> {
                 element.forEach {
                     if (it !is String) throw IllegalArgumentException()
-                    add(argument.value)
-                    add(it)
+                    add(argument.value + "=" + it)
                 }
             }
             else -> throw IllegalArgumentException()
