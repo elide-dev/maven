@@ -44,7 +44,6 @@ object ArgumentParser {
         }
         list.add("--")
         list.addAll(arguments.freeArgs)
-        println(list.joinToString(" "))
         return list.toTypedArray()
     }
 
