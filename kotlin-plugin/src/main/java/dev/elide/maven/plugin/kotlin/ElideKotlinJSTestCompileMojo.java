@@ -22,9 +22,13 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
  * @author Lauri Heino <datafox>
  * @since 1.0.0
  */
+/*
+Disabled until support exists.
+
 @Mojo(name = "test-js",
         defaultPhase = LifecyclePhase.TEST_COMPILE,
         requiresDependencyResolution = ResolutionScope.TEST,
         threadSafe = true)
+ */
 public class ElideKotlinJSTestCompileMojo extends ElideKotlinJSCompileMojoImpl {
 }

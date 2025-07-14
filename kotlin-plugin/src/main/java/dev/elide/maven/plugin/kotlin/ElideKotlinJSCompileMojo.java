@@ -22,9 +22,13 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
  * @author Lauri Heino <datafox>
  * @since 1.0.0
  */
+/*
+Disabled until support exists.
+
 @Mojo(name = "js",
         defaultPhase = LifecyclePhase.COMPILE,
         requiresDependencyResolution = ResolutionScope.COMPILE,
         threadSafe = true)
+ */
 public class ElideKotlinJSCompileMojo extends ElideKotlinJSCompileMojoImpl {
 }
