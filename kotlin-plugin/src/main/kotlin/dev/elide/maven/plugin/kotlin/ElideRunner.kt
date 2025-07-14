@@ -33,6 +33,9 @@ import kotlin.io.path.absolutePathString
  * @since 1.0.0
  */
 object ElideRunner {
+    /**
+     * Executes the Elide Kotlin compiler according to [arguments].
+     */
     fun <A : CommonCompilerArguments> runCompiler(
         messageCollector: MessageCollector,
         arguments: A,

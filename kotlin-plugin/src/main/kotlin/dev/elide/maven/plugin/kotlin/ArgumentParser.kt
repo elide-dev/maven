@@ -25,6 +25,9 @@ import java.util.*
  * @since 1.0.0
  */
 object ArgumentParser {
+    /**
+     * Parses [A] into a list of Elide Kotlin compiler command line arguments.
+     */
     fun <A : CommonCompilerArguments> parseArguments(
         compiler: String,
         arguments: A,
