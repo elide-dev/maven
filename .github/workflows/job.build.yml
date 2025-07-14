@@ -51,3 +51,5 @@ jobs:
         run: ./mvnw clean package -pl sample-java
       - name: "Test: Kotlin Plugin"
         run: ./mvnw clean package -pl sample-kotlin
+      - name: "Test: Mixed source"
+        run: ./mvnw clean package -pl sample-mixed
