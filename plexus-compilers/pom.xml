@@ -7,6 +7,39 @@
     <groupId>dev.elide</groupId>
     <artifactId>elide-plexus-compilers</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>Elide Java Plexus Compiler</name>
+    <description>A Maven-compatible Plexus compiler that uses Elide to compile Java sources.</description>
+    <url>https://elide.dev</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Lauri Heino</name>
+            <email>datafox@datafox.me</email>
+            <organization>Elide</organization>
+            <organizationUrl>https://elide.dev</organizationUrl>
+        </developer>
+        <developer>
+            <name>Sam Gammon</name>
+            <email>sam@elide.dev</email>
+            <organization>Elide</organization>
+            <organizationUrl>https://elide.dev</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/elide-dev/maven.git</connection>
+        <developerConnection>scm:git:ssh://github.com:elide-dev/maven.git</developerConnection>
+        <url>https://github.com/elide-dev/maven/tree/main</url>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

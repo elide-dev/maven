@@ -9,6 +9,32 @@
     <version>1.0.0</version>
     <packaging>maven-plugin</packaging>
 
+    <name>Elide Kotlin Maven Plugin</name>
+    <description>A drop-in replacement for the Kotlin Maven Plugin that uses Elide to compile Kotlin sources.</description>
+    <url>https://elide.dev</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Lauri Heino</name>
+            <email>datafox@datafox.me</email>
+            <organization>Elide</organization>
+            <organizationUrl>https://elide.dev</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/elide-dev/maven.git</connection>
+        <developerConnection>scm:git:ssh://github.com:elide-dev/maven.git</developerConnection>
+        <url>https://github.com/elide-dev/maven/tree/main</url>
+    </scm>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.code.style>official</kotlin.code.style>
