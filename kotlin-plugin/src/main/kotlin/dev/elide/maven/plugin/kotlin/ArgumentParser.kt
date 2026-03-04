@@ -38,7 +38,7 @@ object ArgumentParser {
         list.add(compiler)
         list.add("--")
         getAllFields(arguments::class.java).forEach { list.parseArgument(arguments, it) }
-        if (java && "-d" !in list) {
+        if (java && list.none { it == "-d" || it.startsWith("-d=") }) {
             list.add("-d")
             list.add(project.build.outputDirectory)
         }
@@ -67,7 +67,12 @@ object ArgumentParser {
         when (element) {
             is Boolean -> if (element) add(argument.value)
             is String -> {
-                add(argument.value + "=" + element)
+                if (argument.value == "-d") {
+                    add(argument.value)
+                    add(element)
+                } else {
+                    add(argument.value + "=" + element)
+                }
             }
             is Array<*> -> {
                 element.forEach {
