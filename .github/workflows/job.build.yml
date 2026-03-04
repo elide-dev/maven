@@ -27,22 +27,22 @@ jobs:
       contents: "read"
     steps:
       - name: "Setup: Harden Runner"
-        uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15
         with:
           disable-sudo: true
           egress-policy: audit
       - name: "Setup: Checkout"
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           fetch-depth: 1
           persist-credentials: false
       - name: "Setup: JDK"
-        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
         with:
           distribution: graalvm
-          java-version: "24"
+          java-version: "25"
       - name: "Setup: Elide"
-        uses: elide-dev/setup-elide@990b915b2974a70e7654acb1303607b4cd1d3538 # v2.0.0
+        uses: elide-dev/setup-elide@d91d5859c0722417ea1ac4c682382ac8a6622b80 # v3.0.0
       - name: "Build: Java Compiler"
         run: ./mvnw clean install -pl plexus-compilers
       - name: "Build: Kotlin Plugin"
