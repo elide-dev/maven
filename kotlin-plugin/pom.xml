@@ -41,14 +41,15 @@
         <kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
 
         <compilerVersion>1.0.0</compilerVersion>
-        <kotlinVersion>2.3.10</kotlinVersion>
+        <kotlinVersion>2.3.21</kotlinVersion>
         <injectVersion>1</injectVersion>
         <plexusVersion>2.16.2</plexusVersion>
         <junitVersion>6.0.3</junitVersion>
-        <mavenVersion>3.9.12</mavenVersion>
+        <mavenVersion>3.9.15</mavenVersion>
         <mavenToolsVersion>3.15.2</mavenToolsVersion>
         <mavenTestPluginVersion>3.5.5</mavenTestPluginVersion>
         <mavenCompilerVersion>3.15.0</mavenCompilerVersion>
+        <plexusUtilsVersion>4.0.3</plexusUtilsVersion>
     </properties>
 
     <repositories>
@@ -162,6 +163,23 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- transitive dependency of plexus-compiler-api, updated manually because of a CVE -->
+            <dependency>
+                <groupId>org.codehaus.plexus</groupId>
+                <artifactId>plexus-utils</artifactId>
+                <version>${plexusUtilsVersion}</version>
+            </dependency>
+            <!-- transitive dependency of kotlin-maven-plugin, updated manually because of a CVE -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.22.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>

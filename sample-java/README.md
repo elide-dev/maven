@@ -9,7 +9,7 @@ This project demonstrates use of Elide as a replacement for `javac` within a Mav
     <plugins>
         <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.14.0</version>
+            <version>3.15.0</version>
             <dependencies>
                 <dependency>
                     <groupId>dev.elide</groupId>
