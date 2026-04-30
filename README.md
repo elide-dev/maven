@@ -25,7 +25,7 @@ Configuring Elide as your `javac` compiler:
     <plugins>
         <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.14.0</version>
+            <version>3.15.0</version>
             <dependencies>
                 <dependency>
                     <groupId>dev.elide</groupId>
@@ -77,14 +77,6 @@ the plugin coordinates:
         </plugin>
     </plugins>
 </build>
-
-<dependencies>
-    <dependency>
-        <groupId>org.jetbrains.kotlin</groupId>
-        <artifactId>kotlin-stdlib</artifactId>
-        <version>2.2.0</version>
-    </dependency>
-</dependencies>
 ```
 
 > [!TIP]
@@ -134,7 +126,7 @@ Elide:
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.14.0</version>
+            <version>3.15.0</version>
             <dependencies>
                 <dependency>
                     <groupId>dev.elide</groupId>

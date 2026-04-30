@@ -31,12 +31,4 @@ of `org.jetbrains.kotlin:kotlin-maven-plugin`. Use of `<extensions>` is not supp
         </plugin>
     </plugins>
 </build>
-
-<dependencies>
-    <dependency>
-        <groupId>org.jetbrains.kotlin</groupId>
-        <artifactId>kotlin-stdlib</artifactId>
-        <version>2.2.0</version>
-    </dependency>
-</dependencies>
 ```

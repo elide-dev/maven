@@ -44,7 +44,7 @@ Kotlin plugin `<extensions>` is not supported yet.
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.14.0</version>
+            <version>3.15.0</version>
             <dependencies>
                 <dependency>
                     <groupId>dev.elide</groupId>
