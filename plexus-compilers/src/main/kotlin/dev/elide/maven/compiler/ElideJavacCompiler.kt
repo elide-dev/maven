@@ -80,10 +80,8 @@ public open class ElideJavacCompiler() : AbstractCompiler(
         return CompilerResult(returnCode == 0, messages)
     }
 
-    private fun getElideExecutable(config: CompilerConfiguration): String = when (val executable = config.executable) {
-        null -> ElideLocator.locate()?.absolutePathString()
-        else -> executable
-    } ?: ELIDE_EXECUTABLE
+    private fun getElideExecutable(config: CompilerConfiguration): String =
+        config.executable ?: ElideLocator.locate()?.absolutePathString() ?: ELIDE_EXECUTABLE
 
     override fun createCommandLine(config: CompilerConfiguration): Array<String> {
         return buildElideArgs(config, getSourceFiles(config)).toTypedArray()
