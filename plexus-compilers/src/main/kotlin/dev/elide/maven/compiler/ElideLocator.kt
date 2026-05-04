@@ -35,7 +35,7 @@ object ElideLocator {
      */
     fun locate(): Path? {
         val path = System.getenv("PATH") ?: ""
-        for (pathCandidate in path.split(File.separatorChar)) {
+        for (pathCandidate in path.split(':')) {
             val candidate = Paths.get(pathCandidate, "elide")
             if (isValidElideBinary(candidate)) {
                 return candidate
