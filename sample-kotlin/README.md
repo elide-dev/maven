@@ -2,7 +2,7 @@
 
 This project demonstrates use of Elide as a Kotlin compiler within a Maven project. This is a drop-in replacement for
 the Kotlin plugin, so configure your Kotlin project like normal, but use `dev.elide:elide-kotlin-maven-plugin` instead
-of `org.jetbrains.kotlin:kotlin-maven-plugin`. Use of `<extensions>` is not supported yet.
+of `org.jetbrains.kotlin:kotlin-maven-plugin`.
 
 **`pom.xml`**
 ```xml
@@ -14,20 +14,7 @@ of `org.jetbrains.kotlin:kotlin-maven-plugin`. Use of `<extensions>` is not supp
             <groupId>dev.elide</groupId>
             <artifactId>elide-kotlin-maven-plugin</artifactId>
             <version>1.0.0</version>
-            <executions>
-                <execution>
-                    <id>compile</id>
-                    <goals>
-                        <goal>compile</goal>
-                    </goals>
-                </execution>
-                <execution>
-                    <id>test-compile</id>
-                    <goals>
-                        <goal>test-compile</goal>
-                    </goals>
-                </execution>
-            </executions>
+            <extensions>true</extensions>
         </plugin>
     </plugins>
 </build>
