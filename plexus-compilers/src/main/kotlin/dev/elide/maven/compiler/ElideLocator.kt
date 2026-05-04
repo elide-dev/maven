@@ -12,7 +12,6 @@
  */
 package dev.elide.maven.compiler
 
-import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths
 
@@ -36,7 +35,7 @@ object ElideLocator {
     fun locate(): Path? {
         val path = System.getenv("PATH") ?: ""
         for (pathCandidate in path.split(':')) {
-            val candidate = Paths.get(pathCandidate, "elide")
+            val candidate = Paths.get(pathCandidate, ELIDE_EXECUTABLE)
             if (isValidElideBinary(candidate)) {
                 return candidate
             }

@@ -12,6 +12,7 @@
  */
 package dev.elide.maven.plugin.kotlin
 
+import dev.elide.maven.compiler.ELIDE_EXECUTABLE
 import dev.elide.maven.compiler.ElideLocator
 import org.apache.maven.project.MavenProject
 import org.codehaus.plexus.compiler.CompilerException
@@ -52,7 +53,7 @@ object ElideRunner {
         arguments.freeArgs = freeArgs
         val cli = Commandline()
         cli.workingDirectory = project.basedir
-        cli.executable = executable ?: ElideLocator.locate()?.absolutePathString() ?: "elide"
+        cli.executable = executable ?: ElideLocator.locate()?.absolutePathString() ?: ELIDE_EXECUTABLE
         cli.addArguments(ArgumentParser.parseArguments(compiler, arguments, project, java))
         val out = CommandLineUtils.StringStreamConsumer()
         var returnCode: Int

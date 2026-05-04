@@ -16,3 +16,6 @@ package dev.elide.maven.compiler
  * Constant ID used by the Elide compiler shim.
  */
 public const val ELIDE_COMPILER: String = "elide"
+
+public val ELIDE_EXECUTABLE: String =
+    if (System.getProperty("os.name").contains("windows", true)) "elide.exe" else "elide"
