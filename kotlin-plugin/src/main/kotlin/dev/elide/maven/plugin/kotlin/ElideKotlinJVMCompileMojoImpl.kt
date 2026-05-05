@@ -26,7 +26,7 @@ import java.io.File
  * @author Lauri Heino <datafox>
  * @since 1.0.0
  */
-internal open class ElideKotlinJVMCompileMojoImpl : K2JVMCompileMojo() {
+open class ElideKotlinJVMCompileMojoImpl : K2JVMCompileMojo() {
     /**
      * Elide executable location.
      */
@@ -45,6 +45,5 @@ internal open class ElideKotlinJVMCompileMojoImpl : K2JVMCompileMojo() {
             project,
             executable,
             "kotlinc",
-            true,
         )
 }

@@ -25,24 +25,9 @@
         <plugins>
             <plugin>
                 <groupId>dev.elide</groupId>
-                <artifactId>elide-kotlin-maven-plugin</artifactId>
+                <artifactId>elide-maven-plugin</artifactId>
                 <version>1.0.0</version>
                 <extensions>true</extensions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.15.0</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>dev.elide</groupId>
-                        <artifactId>elide-plexus-compilers</artifactId>
-                        <version>1.0.0</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <compilerId>elide</compilerId>
-                </configuration>
             </plugin>
         </plugins>
     </build>

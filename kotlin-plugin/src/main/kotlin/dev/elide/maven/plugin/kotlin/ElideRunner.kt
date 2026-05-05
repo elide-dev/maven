@@ -44,7 +44,6 @@ object ElideRunner {
         project: MavenProject,
         executable: String?,
         compiler: String,
-        java: Boolean,
     ): ExitCode {
         val freeArgs = arguments.freeArgs.toMutableList()
         for (sourceRoot in sourceRoots) {
@@ -54,7 +53,7 @@ object ElideRunner {
         val cli = Commandline()
         cli.workingDirectory = project.basedir
         cli.executable = executable ?: ElideLocator.locate()?.absolutePathString() ?: ELIDE_EXECUTABLE
-        cli.addArguments(ArgumentParser.parseArguments(compiler, arguments, project, java))
+        cli.addArguments(ArgumentParser.parseArguments(compiler, arguments, project))
         val out = CommandLineUtils.StringStreamConsumer()
         var returnCode: Int
         try {

@@ -32,13 +32,12 @@ object ArgumentParser {
         compiler: String,
         arguments: A,
         project: MavenProject,
-        java: Boolean,
     ): Array<String> {
         val list: MutableList<String> = LinkedList()
         list.add(compiler)
         list.add("--")
         getAllFields(arguments::class.java).forEach { list.parseArgument(arguments, it) }
-        if (java && list.none { it == "-d" || it.startsWith("-d=") }) {
+        if (list.none { it == "-d" || it.startsWith("-d=") }) {
             list.add("-d")
             list.add(project.build.outputDirectory)
         }
