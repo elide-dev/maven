@@ -261,7 +261,7 @@
         </dependency>
         <dependency>
             <groupId>dev.elide</groupId>
-            <artifactId>elide-plexus-compilers</artifactId>
+            <artifactId>elide-java-compiler</artifactId>
             <version>${compilerVersion}</version>
         </dependency>
         <dependency>

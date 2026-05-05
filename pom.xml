@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>plexus-compilers</module>
+        <module>java-compiler</module>
         <module>elide-plugin</module>
         <module>kotlin-plugin</module>
         <module>sample-java</module>
