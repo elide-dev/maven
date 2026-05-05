@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024-2025 Elide Technologies, Inc.
+ * Copyright (c) 2024-2026 Elide Technologies, Inc.
  *
  * Licensed under the MIT license (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
@@ -22,7 +22,9 @@ import java.nio.file.Paths
  * @since 1.0.0
  */
 object ElideLocator {
-    // Checks if a path is a valid binary.
+    /**
+     * Checks if a path is a valid binary.
+     */
     private fun isValidElideBinary(path: Path): Boolean {
         return path.toFile().exists() && path.toFile().isFile && path.toFile().canExecute()
     }

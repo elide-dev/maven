@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024-2025 Elide Technologies, Inc.
+ * Copyright (c) 2024-2026 Elide Technologies, Inc.
  *
  * Licensed under the MIT license (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
@@ -12,11 +12,11 @@
  */
 package dev.elide.maven.plugin.kotlin
 
+import java.lang.reflect.Field
+import java.util.*
 import org.apache.maven.project.MavenProject
 import org.jetbrains.kotlin.cli.common.arguments.Argument
 import org.jetbrains.kotlin.cli.common.arguments.CommonCompilerArguments
-import java.lang.reflect.Field
-import java.util.*
 
 /**
  * Parser for Kotlin compiler arguments.
@@ -25,9 +25,7 @@ import java.util.*
  * @since 1.0.0
  */
 object ArgumentParser {
-    /**
-     * Parses [A] into a list of Elide Kotlin compiler command line arguments.
-     */
+    /** Parses [A] into a list of Elide Kotlin compiler command line arguments. */
     fun <A : CommonCompilerArguments> parseArguments(
         compiler: String,
         arguments: A,
@@ -49,18 +47,19 @@ object ArgumentParser {
     private fun <A : CommonCompilerArguments> getAllFields(type: Class<out A>): List<Field> {
         var type: Class<out CommonCompilerArguments> = type
         val fields: MutableList<Field> = LinkedList()
-        fields.addAll(type.declaredFields.filter { it.trySetAccessible() && it.isAnnotationPresent(Argument::class.java) })
-        while(type != CommonCompilerArguments::class.java) {
+        fields.addAll(
+            type.declaredFields.filter { it.trySetAccessible() && it.isAnnotationPresent(Argument::class.java) }
+        )
+        while (type != CommonCompilerArguments::class.java) {
             type = type.superclass as Class<out CommonCompilerArguments>
-            fields.addAll(type.declaredFields.filter { it.trySetAccessible() && it.isAnnotationPresent(Argument::class.java) })
+            fields.addAll(
+                type.declaredFields.filter { it.trySetAccessible() && it.isAnnotationPresent(Argument::class.java) }
+            )
         }
         return fields
     }
 
-    private fun <A : CommonCompilerArguments> MutableList<String>.parseArgument(
-        arguments: A,
-        field: Field,
-    ) {
+    private fun <A : CommonCompilerArguments> MutableList<String>.parseArgument(arguments: A, field: Field) {
         val argument = field.getAnnotation(Argument::class.java) ?: return
         val element: Any = field.get(arguments) ?: return
         when (element) {
