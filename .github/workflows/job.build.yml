@@ -46,9 +46,11 @@ jobs:
         with:
           channel: nightly
       - name: "Build: Java Compiler"
-        run: ./mvnw clean install -pl plexus-compilers
+        run: ./mvnw clean install -pl java-compiler
       - name: "Build: Kotlin Plugin"
         run: ./mvnw clean install -pl kotlin-plugin
+      - name: "Build: Elide Plugin"
+        run: ./mvnw clean install -pl elide-plugin
       - name: "Test: Java Compiler"
         run: ./mvnw clean package -pl sample-java
       - name: "Test: Kotlin Plugin"
