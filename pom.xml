@@ -11,8 +11,8 @@
 
     <modules>
         <module>java-compiler</module>
-        <module>elide-plugin</module>
         <module>kotlin-plugin</module>
+        <module>elide-plugin</module>
         <module>sample-java</module>
         <module>sample-kotlin</module>
         <module>sample-mixed</module>
