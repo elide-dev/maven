@@ -41,6 +41,7 @@
         <kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
 
         <compilerVersion>1.0.0</compilerVersion>
+        <elideKotlinVersion>1.0.0</elideKotlinVersion>
         <kotlinVersion>2.3.21</kotlinVersion>
         <injectVersion>1</injectVersion>
         <plexusVersion>2.16.2</plexusVersion>
@@ -93,9 +94,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlinVersion}</version>
+                <groupId>dev.elide</groupId>
+                <artifactId>elide-kotlin-maven-plugin</artifactId>
+                <version>${elideKotlinVersion}</version>
                 <executions>
                     <execution>
                         <id>compile</id>
@@ -130,7 +131,7 @@
                 <dependencies>
                     <dependency>
                         <groupId>dev.elide</groupId>
-                        <artifactId>elide-plexus-compilers</artifactId>
+                        <artifactId>elide-java-compiler</artifactId>
                         <version>${compilerVersion}</version>
                     </dependency>
                 </dependencies>
@@ -176,11 +177,11 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- transitive dependency of plexus-compiler-api, updated manually because of a CVE -->
+            <!-- transitive dependency of kotlin-maven-plugin, updated manually because of a CVE -->
             <dependency>
-                <groupId>org.codehaus.plexus</groupId>
-                <artifactId>plexus-utils</artifactId>
-                <version>${plexusUtilsVersion}</version>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.22.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -227,48 +228,14 @@
             <version>${mavenToolsVersion}</version>
         </dependency>
         <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-build-tools-api</artifactId>
-            <version>${kotlinVersion}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-build-tools-impl</artifactId>
-            <version>${kotlinVersion}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-compiler-embeddable</artifactId>
-            <version>${kotlinVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-scripting-compiler-embeddable</artifactId>
-            <version>${kotlinVersion}</version>
-        </dependency>
-        <dependency>
             <groupId>dev.elide</groupId>
             <artifactId>elide-java-compiler</artifactId>
             <version>${compilerVersion}</version>
         </dependency>
         <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>${injectVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-xml</artifactId>
-            <version>4.1.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>dev.elide</groupId>
             <artifactId>elide-kotlin-maven-plugin</artifactId>
             <version>1.0.0</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

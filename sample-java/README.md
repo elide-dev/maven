@@ -1,7 +1,7 @@
 ## Elide Maven Java Compiler: Sample project
 
 This project demonstrates use of Elide as a replacement for `javac` within a Maven project. Explicitly add the
-`maven-compiler-plugin`, add `elide-plexus-compilers` as a dependency, and configure `compilerId` to `elide`.
+`maven-compiler-plugin`, add `elide-java-compiler` as a dependency, and configure `compilerId` to `elide`.
 
 **`pom.xml`**
 ```xml
