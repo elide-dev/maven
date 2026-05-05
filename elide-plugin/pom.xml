@@ -41,7 +41,6 @@
         <kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
 
         <compilerVersion>1.0.0</compilerVersion>
-        <elideKotlinVersion>1.0.0</elideKotlinVersion>
         <kotlinVersion>2.3.21</kotlinVersion>
         <injectVersion>1</injectVersion>
         <plexusVersion>2.16.2</plexusVersion>
@@ -94,9 +93,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>dev.elide</groupId>
-                <artifactId>elide-kotlin-maven-plugin</artifactId>
-                <version>${elideKotlinVersion}</version>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlinVersion}</version>
                 <executions>
                     <execution>
                         <id>compile</id>
