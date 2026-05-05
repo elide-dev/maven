@@ -74,7 +74,7 @@ If you already have a complex project and just want the Elide Java compiler, you
             <dependencies>
                 <dependency>
                     <groupId>dev.elide</groupId>
-                    <artifactId>elide-plexus-compilers</artifactId>
+                    <artifactId>elide-java-compiler</artifactId>
                     <version>1.0.0</version>
                 </dependency>
             </dependencies>

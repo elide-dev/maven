@@ -13,7 +13,7 @@ This project demonstrates use of Elide as a replacement for `javac` within a Mav
             <dependencies>
                 <dependency>
                     <groupId>dev.elide</groupId>
-                    <artifactId>elide-plexus-compilers</artifactId>
+                    <artifactId>elide-java-compiler</artifactId>
                     <version>1.0.0</version>
                 </dependency>
             </dependencies>
