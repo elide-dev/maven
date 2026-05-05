@@ -130,7 +130,7 @@
                 <dependencies>
                     <dependency>
                         <groupId>dev.elide</groupId>
-                        <artifactId>elide-plexus-compilers</artifactId>
+                        <artifactId>elide-java-compiler</artifactId>
                         <version>${compilerVersion}</version>
                     </dependency>
                 </dependencies>
@@ -176,12 +176,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- transitive dependency of plexus-compiler-api, updated manually because of a CVE -->
-            <dependency>
-                <groupId>org.codehaus.plexus</groupId>
-                <artifactId>plexus-utils</artifactId>
-                <version>${plexusUtilsVersion}</version>
-            </dependency>
             <!-- transitive dependency of kotlin-maven-plugin, updated manually because of a CVE -->
             <dependency>
                 <groupId>commons-io</groupId>
@@ -238,36 +232,9 @@
             <version>${mavenToolsVersion}</version>
         </dependency>
         <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-build-tools-api</artifactId>
-            <version>${kotlinVersion}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-build-tools-impl</artifactId>
-            <version>${kotlinVersion}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-compiler-embeddable</artifactId>
-            <version>${kotlinVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-scripting-compiler-embeddable</artifactId>
-            <version>${kotlinVersion}</version>
-        </dependency>
-        <dependency>
             <groupId>dev.elide</groupId>
             <artifactId>elide-java-compiler</artifactId>
             <version>${compilerVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>${injectVersion}</version>
         </dependency>
     </dependencies>
 </project>
