@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024-2025 Elide Technologies, Inc.
+ * Copyright (c) 2024-2026 Elide Technologies, Inc.
  *
  * Licensed under the MIT license (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
@@ -34,9 +34,7 @@ import kotlin.io.path.absolutePathString
  * @since 1.0.0
  */
 object ElideRunner {
-    /**
-     * Executes the Elide Kotlin compiler according to [arguments].
-     */
+    /** Executes the Elide Kotlin compiler according to [arguments]. */
     fun <A : CommonCompilerArguments> runCompiler(
         messageCollector: MessageCollector,
         arguments: A,
@@ -60,8 +58,7 @@ object ElideRunner {
             returnCode = CommandLineUtils.executeCommandLine(cli, out, out)
             out.output.lines().forEach {
                 messageCollector.report(
-                    if (returnCode == 0) CompilerMessageSeverity.INFO
-                    else CompilerMessageSeverity.ERROR,
+                    if (returnCode == 0) CompilerMessageSeverity.INFO else CompilerMessageSeverity.ERROR,
                     it,
                 )
             }

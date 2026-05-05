@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024-2025 Elide Technologies, Inc.
+ * Copyright (c) 2024-2026 Elide Technologies, Inc.
  *
  * Licensed under the MIT license (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
@@ -27,9 +27,7 @@ import java.io.File
  * @since 1.0.0
  */
 open class ElideKotlinKaptJVMTestCompileMojoImpl : KaptTestJvmCompilerMojo() {
-    /**
-     * Elide executable location.
-     */
+    /** Elide executable location. */
     @Parameter(name = "executable") var executable: String? = null
 
     override fun execCompiler(
@@ -37,13 +35,5 @@ open class ElideKotlinKaptJVMTestCompileMojoImpl : KaptTestJvmCompilerMojo() {
         messageCollector: MessageCollector,
         arguments: K2JVMCompilerArguments,
         sourceRoots: List<File>,
-    ): ExitCode =
-        ElideRunner.runCompiler(
-            messageCollector,
-            arguments,
-            sourceRoots,
-            project,
-            executable,
-            "kotlinc",
-        )
+    ): ExitCode = ElideRunner.runCompiler(messageCollector, arguments, sourceRoots, project, executable, "kotlinc")
 }
