@@ -11,6 +11,7 @@
 
     <modules>
         <module>plexus-compilers</module>
+        <module>elide-plugin</module>
         <module>kotlin-plugin</module>
         <module>sample-java</module>
         <module>sample-kotlin</module>
