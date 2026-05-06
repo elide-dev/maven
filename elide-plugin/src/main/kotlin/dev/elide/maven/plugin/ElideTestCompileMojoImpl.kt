@@ -12,7 +12,6 @@
  */
 package dev.elide.maven.plugin
 
-import dev.elide.maven.compiler.ElideJavacCompiler
 import org.apache.maven.plugin.compiler.AbstractCompilerMojo
 import org.apache.maven.plugin.compiler.TestCompilerMojo
 import org.apache.maven.plugins.annotations.Parameter
@@ -27,11 +26,17 @@ open class ElideTestCompileMojoImpl : TestCompilerMojo() {
     /** Elide executable location. */
     @Parameter(name = "executable") var executable: String? = null
 
-    init {
+    override fun execute() {
         AbstractCompilerMojo::class.java.getDeclaredField("compilerId").apply {
             isAccessible = true
             set(this@ElideTestCompileMojoImpl, "elide")
         }
-        ElideJavacCompiler.executable = executable
+        executable?.let {
+            AbstractCompilerMojo::class.java.getDeclaredField("executable").apply {
+                isAccessible = true
+                set(this@ElideTestCompileMojoImpl, it)
+            }
+        }
+        super.execute()
     }
 }
