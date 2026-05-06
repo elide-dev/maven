@@ -78,7 +78,7 @@ open class ElideJavacCompiler :
     }
 
     private fun getElideExecutable(config: CompilerConfiguration): String =
-        executable ?: config.executable ?: ElideLocator.locate()?.absolutePathString() ?: ELIDE_EXECUTABLE
+        config.executable ?: ElideLocator.locate()?.absolutePathString() ?: ELIDE_EXECUTABLE
 
     override fun createCommandLine(config: CompilerConfiguration): Array<String> {
         return buildElideArgs(config, getSourceFiles(config)).toTypedArray()
@@ -206,10 +206,5 @@ open class ElideJavacCompiler :
         // very lazy for now
         val kind = if (exitCode == 0) CompilerMessage.Kind.NOTE else CompilerMessage.Kind.ERROR
         return input.map { CompilerMessage(it, kind) }
-    }
-
-    companion object {
-        // allow overriding executable in elide-maven-plugin
-        var executable: String? = null
     }
 }
