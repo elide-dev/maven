@@ -52,8 +52,8 @@ jobs:
       - name: "Build: Elide Plugin"
         run: ./mvnw clean install -pl elide-plugin
       - name: "Test: Java Compiler"
-        run: ./mvnw clean package -f sample-java
+        run: ./mvnw clean package exec:java -f sample-java
       - name: "Test: Kotlin Plugin"
-        run: ./mvnw clean package -f sample-kotlin
+        run: ./mvnw clean package exec:java -f sample-kotlin
       - name: "Test: Mixed source"
-        run: ./mvnw clean package -f sample-mixed
+        run: ./mvnw clean package exec:java -f sample-mixed
