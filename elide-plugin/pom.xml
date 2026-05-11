@@ -50,6 +50,17 @@
         <mavenTestPluginVersion>3.5.5</mavenTestPluginVersion>
         <mavenCompilerVersion>3.15.0</mavenCompilerVersion>
         <plexusUtilsVersion>4.0.3</plexusUtilsVersion>
+        <!-- version used by kotlin-maven-plugin to avoid conflicts -->
+        <mavenCompilerKotlinPluginVersion>3.14.0</mavenCompilerKotlinPluginVersion>
+
+        <!-- used only for META-INF/plexus/components.xml -->
+        <mavenResourcesPluginVersion>3.5.0</mavenResourcesPluginVersion>
+        <mavenJarPluginVersion>3.5.0</mavenJarPluginVersion>
+        <mavenInstallPluginVersion>3.1.4</mavenInstallPluginVersion>
+        <mavenDeployPluginVersion>3.1.4</mavenDeployPluginVersion>
+        <mavenEjbPluginVersion>3.3.0</mavenEjbPluginVersion>
+        <mavenWarPluginVersion>3.5.1</mavenWarPluginVersion>
+        <mavenRarPluginVersion>3.1.0</mavenRarPluginVersion>
     </properties>
 
     <repositories>
@@ -220,6 +231,12 @@
                     <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${mavenCompilerKotlinPluginVersion}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>

@@ -73,7 +73,7 @@ open class ElideJavacCompiler : JavacCompiler() {
             val argumentsFile =
                 JavacCompiler::class
                     .java
-                    .getDeclaredMethod("createFileWithArguments", String::class.java.arrayType(), String::class.java)
+                    .getDeclaredMethod("createFileWithArguments", Array<String>::class.java, String::class.java)
                     .run {
                         isAccessible = true
                         invoke(this@ElideJavacCompiler, args, config.buildDirectory.absolutePath) as File
@@ -163,9 +163,8 @@ open class ElideJavacCompiler : JavacCompiler() {
 
     private fun tryParseVersion(versions: List<String>): String? {
         for (version in versions) {
-            if (version.matches(VERSION_RE)) {
-                return version.substringBefore('.')
-            }
+            val match = VERSION_RE.find(version) ?: continue
+            return match.value.substringBefore('.')
         }
         return null
     }
