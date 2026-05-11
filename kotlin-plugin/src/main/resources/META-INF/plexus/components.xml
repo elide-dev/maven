@@ -15,33 +15,33 @@
                                 ${project.groupId}:${project.artifactId}:${project.version}:kapt
                             </process-sources>
                             <process-resources>
-                                org.apache.maven.plugins:maven-resources-plugin:3.3.0:resources
+                                org.apache.maven.plugins:maven-resources-plugin:${mavenResourcesPluginVersion}:resources
                             </process-resources>
                             <compile>
                                 ${project.groupId}:${project.artifactId}:${project.version}:compile,
-                                org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile
+                                org.apache.maven.plugins:maven-compiler-plugin:${mavenCompilerVersion}:compile
                             </compile>
                             <process-test-sources>
                                 ${project.groupId}:${project.artifactId}:${project.version}:test-kapt
                             </process-test-sources>
                             <process-test-resources>
-                                org.apache.maven.plugins:maven-resources-plugin:3.3.0:testResources
+                                org.apache.maven.plugins:maven-resources-plugin:${mavenResourcesPluginVersion}:testResources
                             </process-test-resources>
                             <test-compile>
                                 ${project.groupId}:${project.artifactId}:${project.version}:test-compile,
-                                org.apache.maven.plugins:maven-compiler-plugin:3.10.1:testCompile
+                                org.apache.maven.plugins:maven-compiler-plugin:${mavenCompilerVersion}:testCompile
                             </test-compile>
                             <test>
-                                org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M7:test
+                                org.apache.maven.plugins:maven-surefire-plugin:${mavenTestPluginVersion}:test
                             </test>
                             <package>
-                                org.apache.maven.plugins:maven-jar-plugin:3.3.0:jar
+                                org.apache.maven.plugins:maven-jar-plugin:${mavenJarPluginVersion}:jar
                             </package>
                             <install>
-                                org.apache.maven.plugins:maven-install-plugin:3.0.1:install
+                                org.apache.maven.plugins:maven-install-plugin:${mavenInstallPluginVersion}:install
                             </install>
                             <deploy>
-                                org.apache.maven.plugins:maven-deploy-plugin:3.0.0:deploy
+                                org.apache.maven.plugins:maven-deploy-plugin:${mavenDeployPluginVersion}:deploy
                             </deploy>
                         </phases>
 
@@ -64,33 +64,33 @@
                                 ${project.groupId}:${project.artifactId}:${project.version}:kapt
                             </process-sources>
                             <process-resources>
-                                org.apache.maven.plugins:maven-resources-plugin:3.3.0:resources
+                                org.apache.maven.plugins:maven-resources-plugin:${mavenResourcesPluginVersion}:resources
                             </process-resources>
                             <compile>
                                 ${project.groupId}:${project.artifactId}:${project.version}:compile,
-                                org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile
+                                org.apache.maven.plugins:maven-compiler-plugin:${mavenCompilerVersion}:compile
                             </compile>
                             <process-test-sources>
                                 ${project.groupId}:${project.artifactId}:${project.version}:test-kapt
                             </process-test-sources>
                             <process-test-resources>
-                                org.apache.maven.plugins:maven-resources-plugin:3.3.0:testResources
+                                org.apache.maven.plugins:maven-resources-plugin:${mavenResourcesPluginVersion}:testResources
                             </process-test-resources>
                             <test-compile>
                                 ${project.groupId}:${project.artifactId}:${project.version}:test-compile,
-                                org.apache.maven.plugins:maven-compiler-plugin:3.10.1:testCompile
+                                org.apache.maven.plugins:maven-compiler-plugin:${mavenCompilerVersion}:testCompile
                             </test-compile>
                             <test>
-                                org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M7:test
+                                org.apache.maven.plugins:maven-surefire-plugin:${mavenTestPluginVersion}:test
                             </test>
                             <package>
-                                org.apache.maven.plugins:maven-ejb-plugin:3.2.1:ejb
+                                org.apache.maven.plugins:maven-ejb-plugin:${mavenEjbPluginVersion}:ejb
                             </package>
                             <install>
-                                org.apache.maven.plugins:maven-install-plugin:3.0.1:install
+                                org.apache.maven.plugins:maven-install-plugin:${mavenInstallPluginVersion}:install
                             </install>
                             <deploy>
-                                org.apache.maven.plugins:maven-deploy-plugin:3.3.0:deploy
+                                org.apache.maven.plugins:maven-deploy-plugin:${mavenDeployPluginVersion}:deploy
                             </deploy>
                         </phases>
 
@@ -113,33 +113,33 @@
                                 ${project.groupId}:${project.artifactId}:${project.version}:kapt
                             </process-sources>
                             <process-resources>
-                                org.apache.maven.plugins:maven-resources-plugin:3.3.0:resources
+                                org.apache.maven.plugins:maven-resources-plugin:${mavenResourcesPluginVersion}:resources
                             </process-resources>
                             <compile>
                                 ${project.groupId}:${project.artifactId}:${project.version}:compile,
-                                org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile
+                                org.apache.maven.plugins:maven-compiler-plugin:${mavenCompilerVersion}:compile
                             </compile>
                             <process-test-sources>
                                 ${project.groupId}:${project.artifactId}:${project.version}:test-kapt
                             </process-test-sources>
                             <process-test-resources>
-                                org.apache.maven.plugins:maven-resources-plugin:3.3.0:testResources
+                                org.apache.maven.plugins:maven-resources-plugin:${mavenResourcesPluginVersion}:testResources
                             </process-test-resources>
                             <test-compile>
                                 ${project.groupId}:${project.artifactId}:${project.version}:test-compile,
-                                org.apache.maven.plugins:maven-compiler-plugin:3.10.1:testCompile
+                                org.apache.maven.plugins:maven-compiler-plugin:${mavenCompilerVersion}:testCompile
                             </test-compile>
                             <test>
-                                org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M7:test
+                                org.apache.maven.plugins:maven-surefire-plugin:${mavenTestPluginVersion}:test
                             </test>
                             <package>
-                                org.apache.maven.plugins:maven-war-plugin:2.2:war
+                                org.apache.maven.plugins:maven-war-plugin:${mavenWarPluginVersion}:war
                             </package>
                             <install>
-                                org.apache.maven.plugins:maven-install-plugin:3.0.1:install
+                                org.apache.maven.plugins:maven-install-plugin:${mavenInstallPluginVersion}:install
                             </install>
                             <deploy>
-                                org.apache.maven.plugins:maven-deploy-plugin:3.3.0:deploy
+                                org.apache.maven.plugins:maven-deploy-plugin:${mavenDeployPluginVersion}:deploy
                             </deploy>
                         </phases>
 
@@ -162,33 +162,33 @@
                                 ${project.groupId}:${project.artifactId}:${project.version}:kapt
                             </process-sources>
                             <process-resources>
-                                org.apache.maven.plugins:maven-resources-plugin:3.3.0:resources
+                                org.apache.maven.plugins:maven-resources-plugin:${mavenResourcesPluginVersion}:resources
                             </process-resources>
                             <compile>
                                 ${project.groupId}:${project.artifactId}:${project.version}:compile,
-                                org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile
+                                org.apache.maven.plugins:maven-compiler-plugin:${mavenCompilerVersion}:compile
                             </compile>
                             <process-test-sources>
                                 ${project.groupId}:${project.artifactId}:${project.version}:test-kapt
                             </process-test-sources>
                             <process-test-resources>
-                                org.apache.maven.plugins:maven-resources-plugin:3.3.0:testResources
+                                org.apache.maven.plugins:maven-resources-plugin:${mavenResourcesPluginVersion}:testResources
                             </process-test-resources>
                             <test-compile>
                                 ${project.groupId}:${project.artifactId}:${project.version}:test-compile,
-                                org.apache.maven.plugins:maven-compiler-plugin:3.10.1:testCompile
+                                org.apache.maven.plugins:maven-compiler-plugin:${mavenCompilerVersion}:testCompile
                             </test-compile>
                             <test>
-                                org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M7:test
+                                org.apache.maven.plugins:maven-surefire-plugin:${mavenTestPluginVersion}:test
                             </test>
                             <package>
-                                org.apache.maven.plugins:maven-rar-plugin:3.0.0:rar
+                                org.apache.maven.plugins:maven-rar-plugin:${mavenRarPluginVersion}:rar
                             </package>
                             <install>
-                                org.apache.maven.plugins:maven-install-plugin:3.0.1:install
+                                org.apache.maven.plugins:maven-install-plugin:${mavenInstallPluginVersion}:install
                             </install>
                             <deploy>
-                                org.apache.maven.plugins:maven-deploy-plugin:3.3.0:deploy
+                                org.apache.maven.plugins:maven-deploy-plugin:${mavenDeployPluginVersion}:deploy
                             </deploy>
                         </phases>
 
