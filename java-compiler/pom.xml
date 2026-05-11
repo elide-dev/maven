@@ -121,5 +121,10 @@
             <artifactId>plexus-compiler-api</artifactId>
             <version>${plexusVersion}</version>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-compiler-javac</artifactId>
+            <version>${plexusVersion}</version>
+        </dependency>
     </dependencies>
 </project>
