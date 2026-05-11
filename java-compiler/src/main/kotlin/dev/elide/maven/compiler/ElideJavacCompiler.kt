@@ -133,7 +133,7 @@ open class ElideJavacCompiler : JavacCompiler() {
     private fun getElideExecutable(config: CompilerConfiguration): String =
         config.executable ?: ElideLocator.locate()?.absolutePathString() ?: ELIDE_EXECUTABLE
 
-    private fun getElideJavacVersion(executable: String): String? {
+    internal fun getElideJavacVersion(executable: String): String? {
         val cli = Commandline()
         cli.setExecutable(executable)
         cli.addArguments(arrayOf("javac", "--", "-version"))
