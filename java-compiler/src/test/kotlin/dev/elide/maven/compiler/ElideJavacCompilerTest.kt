@@ -34,7 +34,11 @@ class ElideJavacCompilerTest {
     @Test
     fun `can retrieve elide javac version`() {
         val compiler = ElideJavacCompiler()
-        val version = assertNotNull(compiler.getElideJavacVersion(ELIDE_PATH.absolutePathString()), "Elide javac version could not be retrieved")
+        val version =
+            assertNotNull(
+                compiler.getElideJavacVersion(ELIDE_PATH.absolutePathString()),
+                "Elide javac version could not be retrieved",
+            )
         val versionInt = assertDoesNotThrow("Retrieved version should be an integer") { version.toInt() }
         assertTrue(versionInt >= 25, "Retrieved version should be 25 or higher")
     }

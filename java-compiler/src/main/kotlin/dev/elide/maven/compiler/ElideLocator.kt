@@ -23,9 +23,7 @@ import java.nio.file.Paths
  * @since 1.0.0
  */
 object ElideLocator {
-    /**
-     * Checks if a path is a valid binary.
-     */
+    /** Checks if a path is a valid binary. */
     private fun isValidElideBinary(path: Path): Boolean {
         return path.toFile().exists() && path.toFile().isFile && path.toFile().canExecute()
     }

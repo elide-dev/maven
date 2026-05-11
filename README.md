@@ -17,7 +17,7 @@ This plugin can be consumed in a Maven project to use [Elide](https://elide.dev)
 
 ### Elide Plugin
 
-The easiest way to start using Elide in your project is the `elide-maven-plugin`. Enable it and set `extensions` to 
+The easiest way to start using Elide in your project is the `elide-maven-plugin`. Enable it and set `extensions` to
 `true` and all of your Java and Kotlin sources will be compiled with Elide `javac` and `kotlinc`.
 
 **`pom.xml`**
@@ -39,7 +39,7 @@ The easiest way to start using Elide in your project is the `elide-maven-plugin`
 
 ### Kotlin drop-in replacement
 
-If you already have a project that uses the `kotlin-maven-plugin`, you can use the `elide-kotlin-maven-plugin` as a 
+If you already have a project that uses the `kotlin-maven-plugin`, you can use the `elide-kotlin-maven-plugin` as a
 drop-in replacement. It supports all configuration you would expect from the Kotlin Maven plugin.
 
 **`pom.xml`**
