@@ -42,12 +42,9 @@ class ElideKotlinPluginTest {
         assertEquals("output/directory", parsedArguments[dIndex + 1])
     }
 
-    class MockCompilerArguments(override val configurator: CommonCompilerArgumentsConfigurator) : CommonCompilerArguments() {
-        @Argument(
-            value = "-XXspecial-argument",
-            valueDescription = "<str>",
-            description = "This is just for testing.",
-        )
+    class MockCompilerArguments(override val configurator: CommonCompilerArgumentsConfigurator) :
+        CommonCompilerArguments() {
+        @Argument(value = "-XXspecial-argument", valueDescription = "<str>", description = "This is just for testing.")
         var someSpecialArgument: String? = null
             set(value) {
                 checkFrozen()

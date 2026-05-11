@@ -12,11 +12,11 @@
  */
 package dev.elide.maven.plugin.kotlin
 
-import java.lang.reflect.Field
-import java.util.*
 import org.apache.maven.project.MavenProject
 import org.jetbrains.kotlin.cli.common.arguments.Argument
 import org.jetbrains.kotlin.cli.common.arguments.CommonCompilerArguments
+import java.lang.reflect.Field
+import java.util.*
 
 /**
  * Parser for Kotlin compiler arguments.

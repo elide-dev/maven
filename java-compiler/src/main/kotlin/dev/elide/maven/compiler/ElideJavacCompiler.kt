@@ -108,14 +108,14 @@ open class ElideJavacCompiler : JavacCompiler() {
                     .run {
                         isAccessible = true
                         @Suppress("UNCHECKED_CAST")
-                        invoke(null, returnCode, BufferedReader(StringReader(out.output))) as MutableList<CompilerMessage>
+                        invoke(null, returnCode, BufferedReader(StringReader(out.output)))
+                            as MutableList<CompilerMessage>
                     }
-            val last = out.output.lines().reversed().let {
-                for (line in it) {
-                    if (line.isNotBlank()) return@let line
+            val last =
+                out.output.lines().reversed().let {
+                    for (line in it) if (line.isNotBlank()) return@let line
+                    ""
                 }
-                ""
-            }
             if (last.isNotBlank()) {
                 if (last.contains("✅")) messages.add(CompilerMessage(last, CompilerMessage.Kind.NOTE))
                 else if (last.contains("❌")) messages.add(CompilerMessage(last, CompilerMessage.Kind.ERROR))

@@ -10,7 +10,8 @@
     <packaging>maven-plugin</packaging>
 
     <name>Elide Kotlin Maven Plugin</name>
-    <description>A drop-in replacement for the Kotlin Maven Plugin that uses Elide to compile Kotlin sources.</description>
+    <description>A drop-in replacement for the Kotlin Maven Plugin that uses Elide to compile Kotlin sources.
+    </description>
     <url>https://elide.dev</url>
 
     <licenses>

@@ -57,22 +57,16 @@ open class ElideKotlinLifecycleParticipant : KotlinLifecycleParticipant() {
         name: String,
         vararg args: Pair<Class<out Any>, out Any?>,
     ): Boolean =
-        T::class
-            .java
-            .getDeclaredMethod(name, *args.map { it.first }.toTypedArray())
-            .run {
-                isAccessible = true
-                invoke(this@ElideKotlinLifecycleParticipant, *args.map { it.second }.toTypedArray()) as Boolean
-            }
+        T::class.java.getDeclaredMethod(name, *args.map { it.first }.toTypedArray()).run {
+            isAccessible = true
+            invoke(this@ElideKotlinLifecycleParticipant, *args.map { it.second }.toTypedArray()) as Boolean
+        }
 
     inline fun <reified T> T.callPrivateFunc(name: String, vararg args: Pair<Class<out Any>, out Any?>) {
-        T::class
-            .java
-            .getDeclaredMethod(name, *args.map { it.first }.toTypedArray())
-            .apply {
-                isAccessible = true
-                invoke(this@ElideKotlinLifecycleParticipant, *args.map { it.second }.toTypedArray())
-            }
+        T::class.java.getDeclaredMethod(name, *args.map { it.first }.toTypedArray()).apply {
+            isAccessible = true
+            invoke(this@ElideKotlinLifecycleParticipant, *args.map { it.second }.toTypedArray())
+        }
     }
 
     inline fun <reified T> T.callArg() = Pair(T::class.java, this)
