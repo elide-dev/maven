@@ -52,6 +52,8 @@
         <junitVersion>6.0.3</junitVersion>
         <mavenTestPluginVersion>3.5.5</mavenTestPluginVersion>
         <plexusUtilsVersion>4.0.3</plexusUtilsVersion>
+        <plexusTestingVersion>1.5.0</plexusTestingVersion>
+        <guavaVersion>33.6.0-jre</guavaVersion>
     </properties>
 
     <repositories>
@@ -90,22 +92,17 @@
                 <artifactId>plexus-utils</artifactId>
                 <version>${plexusUtilsVersion}</version>
             </dependency>
+            <!-- transitive dependency of plexus-testing, updated manually because of a CVE -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guavaVersion}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test-junit5</artifactId>
-            <version>${kotlinVersion}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junitVersion}</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
@@ -125,6 +122,24 @@
             <groupId>org.codehaus.plexus</groupId>
             <artifactId>plexus-compiler-javac</artifactId>
             <version>${plexusVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test-junit5</artifactId>
+            <version>${kotlinVersion}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junitVersion}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-testing</artifactId>
+            <version>${plexusTestingVersion}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
