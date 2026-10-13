@@ -1,0 +1,109 @@
+name: "Release"
+
+"on":
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: "read"
+
+concurrency:
+  group: "release-${{ github.ref }}"
+  cancel-in-progress: false
+
+jobs:
+  github-release:
+    name: "GitHub Release"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "write"
+    steps:
+      - name: "Setup: Harden Runner"
+        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        with:
+          disable-sudo: true
+          egress-policy: audit
+      - name: "Setup: Checkout"
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: "Setup: JDK"
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
+        with:
+          distribution: graalvm
+          java-version: "25"
+      - name: "Setup: Elide"
+        uses: elide-dev/setup-elide@d2f742321bf672300c0935839b6f5c6e562a965b # v4.1.0
+        with:
+          channel: nightly
+      - name: "Check: Tag matches module versions"
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          for module in java-compiler kotlin-plugin elide-plugin; do
+            version="$(./mvnw -B -q -f "$module" help:evaluate -Dexpression=project.version -DforceStdout)"
+            if [ "$version" != "$tag" ]; then
+              echo "::error::$module is at $version, tag is $GITHUB_REF_NAME"
+              exit 1
+            fi
+          done
+      - name: "Build: Artifacts"
+        run: ./mvnw -B -Prelease -Dgpg.skip install -pl java-compiler,kotlin-plugin,elide-plugin
+      - name: "Release: GitHub"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --title "$GITHUB_REF_NAME" --generate-notes \
+            java-compiler/target/*.jar kotlin-plugin/target/*.jar elide-plugin/target/*.jar
+
+  maven-central:
+    name: "Maven Central"
+    needs: github-release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+    steps:
+      - name: "Setup: Harden Runner"
+        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        with:
+          disable-sudo: true
+          egress-policy: audit
+      - name: "Check: Publishing secrets"
+        env:
+          CENTRAL_USER: ${{ secrets.PUBLISH_USER_CENTRAL }}
+          CENTRAL_TOKEN: ${{ secrets.PUBLISH_TOKEN_CENTRAL }}
+          GPG_KEY: ${{ secrets.MAVEN_GPG_KEY }}
+        run: |
+          missing=""
+          [ -n "$CENTRAL_USER" ] || missing="$missing PUBLISH_USER_CENTRAL"
+          [ -n "$CENTRAL_TOKEN" ] || missing="$missing PUBLISH_TOKEN_CENTRAL"
+          [ -n "$GPG_KEY" ] || missing="$missing MAVEN_GPG_KEY"
+          if [ -n "$missing" ]; then
+            echo "::error::Missing secrets:$missing"
+            exit 1
+          fi
+      - name: "Setup: Checkout"
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: "Setup: JDK"
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
+        with:
+          distribution: graalvm
+          java-version: "25"
+          server-id: central
+          server-username: CENTRAL_USER
+          server-password: CENTRAL_TOKEN
+      - name: "Setup: Elide"
+        uses: elide-dev/setup-elide@d2f742321bf672300c0935839b6f5c6e562a965b # v4.1.0
+        with:
+          channel: nightly
+      - name: "Publish: Maven Central"
+        env:
+          CENTRAL_USER: ${{ secrets.PUBLISH_USER_CENTRAL }}
+          CENTRAL_TOKEN: ${{ secrets.PUBLISH_TOKEN_CENTRAL }}
+          MAVEN_GPG_KEY: ${{ secrets.MAVEN_GPG_KEY }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+        run: ./mvnw -B -Prelease deploy -pl java-compiler,kotlin-plugin,elide-plugin
