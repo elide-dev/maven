@@ -71,14 +71,14 @@ jobs:
           egress-policy: audit
       - name: "Check: Publishing secrets"
         env:
-          CENTRAL_USER: ${{ secrets.PUBLISH_USER_CENTRAL }}
-          CENTRAL_TOKEN: ${{ secrets.PUBLISH_TOKEN_CENTRAL }}
-          GPG_KEY: ${{ secrets.MAVEN_GPG_KEY }}
+          CENTRAL_USER: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          GPG_KEY: ${{ secrets.GPG_SIGNING_KEY }}
         run: |
           missing=""
-          [ -n "$CENTRAL_USER" ] || missing="$missing PUBLISH_USER_CENTRAL"
-          [ -n "$CENTRAL_TOKEN" ] || missing="$missing PUBLISH_TOKEN_CENTRAL"
-          [ -n "$GPG_KEY" ] || missing="$missing MAVEN_GPG_KEY"
+          [ -n "$CENTRAL_USER" ] || missing="$missing MAVEN_CENTRAL_USERNAME"
+          [ -n "$CENTRAL_TOKEN" ] || missing="$missing MAVEN_CENTRAL_PASSWORD"
+          [ -n "$GPG_KEY" ] || missing="$missing GPG_SIGNING_KEY"
           if [ -n "$missing" ]; then
             echo "::error::Missing secrets:$missing"
             exit 1
@@ -102,8 +102,12 @@ jobs:
           channel: nightly
       - name: "Publish: Maven Central"
         env:
-          CENTRAL_USER: ${{ secrets.PUBLISH_USER_CENTRAL }}
-          CENTRAL_TOKEN: ${{ secrets.PUBLISH_TOKEN_CENTRAL }}
-          MAVEN_GPG_KEY: ${{ secrets.MAVEN_GPG_KEY }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
-        run: ./mvnw -B -Prelease deploy -pl java-compiler,kotlin-plugin,elide-plugin
+          CENTRAL_USER: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          # base64 of the key, as in elide-dev/runtime; the bc signer reads MAVEN_GPG_KEY
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSPHRASE }}
+        run: |
+          MAVEN_GPG_KEY="$(printf '%s' "$GPG_SIGNING_KEY" | base64 --decode)"
+          export MAVEN_GPG_KEY
+          ./mvnw -B -Prelease deploy -pl java-compiler,kotlin-plugin,elide-plugin
