@@ -109,5 +109,7 @@ jobs:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSPHRASE }}
         run: |
           MAVEN_GPG_KEY="$(printf '%s' "$GPG_SIGNING_KEY" | base64 --decode)"
+          # Actions masks the base64 secret, not its decoded lines.
+          while IFS= read -r line; do [ -n "$line" ] && echo "::add-mask::$line"; done <<< "$MAVEN_GPG_KEY"
           export MAVEN_GPG_KEY
           ./mvnw -B -Prelease deploy -pl java-compiler,kotlin-plugin,elide-plugin
