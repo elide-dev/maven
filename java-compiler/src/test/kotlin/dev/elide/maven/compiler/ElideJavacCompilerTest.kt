@@ -48,7 +48,7 @@ class ElideJavacCompilerTest {
 
         val ELIDE_PATH by lazy { elidePath }
 
-        val ELIDE_VERSION_RE = "\\d+\\.\\d+\\.\\d+(-.*)?".toRegex()
+        val ELIDE_VERSION_RE = "\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?(\\+[0-9A-Za-z.-]+)?".toRegex()
 
         @BeforeAll
         @JvmStatic

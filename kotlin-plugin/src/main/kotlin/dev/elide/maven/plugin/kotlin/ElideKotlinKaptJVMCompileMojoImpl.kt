@@ -30,6 +30,10 @@ open class ElideKotlinKaptJVMCompileMojoImpl : KaptJVMCompilerMojo() {
     /** Elide executable location. */
     @Parameter(name = "executable") var executable: String? = null
 
+    override fun execute() {
+        if (hasAnnotationProcessors()) super.execute() else skipKapt()
+    }
+
     override fun execCompiler(
         compiler: CLICompiler<K2JVMCompilerArguments>?,
         messageCollector: MessageCollector,
