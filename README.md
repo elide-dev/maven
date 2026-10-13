@@ -93,6 +93,6 @@ If you already have a complex project and just want the Elide Java compiler, you
 
 Set the same version in `java-compiler`, `kotlin-plugin` and `elide-plugin` (including the inter-module
 `compilerVersion` and `elide-kotlin-maven-plugin` references), merge, then push a `v<version>` tag. The `Release`
-workflow creates the GitHub release and publishes to Maven Central. Publishing needs the `PUBLISH_USER_CENTRAL` and
-`PUBLISH_TOKEN_CENTRAL` (Central Portal user token) and `MAVEN_GPG_KEY` (ASCII-armored signing key) secrets, plus
-`MAVEN_GPG_PASSPHRASE` when the key has one.
+workflow creates the GitHub release and publishes to Maven Central. Publishing needs the `MAVEN_CENTRAL_USERNAME` and
+`MAVEN_CENTRAL_PASSWORD` (Central Portal user token) and `GPG_SIGNING_KEY` (base64-encoded signing key) secrets, plus
+`GPG_SIGNING_PASSPHRASE` when the key has one.
