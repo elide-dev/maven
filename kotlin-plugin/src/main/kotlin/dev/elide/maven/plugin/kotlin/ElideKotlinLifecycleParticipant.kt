@@ -15,6 +15,7 @@ package dev.elide.maven.plugin.kotlin
 import org.apache.maven.execution.MavenSession
 import org.apache.maven.model.Plugin
 import org.apache.maven.project.MavenProject
+import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import org.jetbrains.kotlin.maven.KotlinLifecycleParticipant
 
 /**
@@ -35,13 +36,20 @@ open class ElideKotlinLifecycleParticipant : KotlinLifecycleParticipant() {
                     callPrivateFuncBoolean<KotlinLifecycleParticipant>("isExtensionsEnabled", plugin.callArg()) &&
                     callPrivateFuncBoolean<KotlinLifecycleParticipant>("isSmartDefaultsEnabled", project.callArg())
             ) {
-                callPrivateFunc<KotlinLifecycleParticipant>(
-                    "configureSmartDefaults",
-                    project.callArg(),
-                    plugin.callArg(),
-                )
+                configureSmartDefaults(project, plugin)
             }
         }
+    }
+
+    /** Adds Kotlin source roots and a `kotlin-stdlib` dependency matching this plugin's Kotlin version. */
+    fun configureSmartDefaults(project: MavenProject, plugin: Plugin) {
+        // upstream takes the stdlib version from the plugin version, which here is Elide's
+        callPrivateFunc<KotlinLifecycleParticipant>("addSourceRoots", project.callArg(), plugin.callArg())
+        callPrivateFunc<KotlinLifecycleParticipant>(
+            "addStdlibDependency",
+            project.callArg(),
+            KotlinCompilerVersion.VERSION.callArg(),
+        )
     }
 
     fun getElideKotlinMavenPlugin(project: MavenProject): Plugin? {

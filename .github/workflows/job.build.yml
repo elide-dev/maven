@@ -21,8 +21,12 @@ permissions:
 
 jobs:
   build:
-    name: "Maven Plugin"
+    name: "Maven Plugin (Elide ${{ matrix.elide }})"
     runs-on: ${{ inputs.runner || 'ubuntu-latest' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        elide: ["nightly", "1.6.0-rc.2"]
     permissions:
       contents: "read"
     steps:
@@ -41,10 +45,17 @@ jobs:
         with:
           distribution: graalvm
           java-version: "25"
-      - name: "Setup: Elide"
+      - name: "Setup: Elide (nightly)"
+        if: matrix.elide == 'nightly'
         uses: elide-dev/setup-elide@d2f742321bf672300c0935839b6f5c6e562a965b # v4.1.0
         with:
           channel: nightly
+      - name: "Setup: Elide (${{ matrix.elide }})"
+        if: matrix.elide != 'nightly'
+        uses: elide-dev/setup-elide@d2f742321bf672300c0935839b6f5c6e562a965b # v4.1.0
+        with:
+          custom_url: "https://github.com/elide-dev/elide/releases/download/v${{ matrix.elide }}/elide.linux-amd64.tgz"
+          version_tag: ${{ matrix.elide }}
       - name: "Build: Java Compiler"
         run: ./mvnw clean install -pl java-compiler
       - name: "Build: Kotlin Plugin"
