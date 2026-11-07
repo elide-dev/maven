@@ -14,7 +14,7 @@ This project demonstrates use of Elide as a replacement for `javac` within a Mav
                 <dependency>
                     <groupId>dev.elide</groupId>
                     <artifactId>elide-java-compiler</artifactId>
-                    <version>1.0.0</version>
+                    <version>1.0.1</version>
                 </dependency>
             </dependencies>
             <configuration>
