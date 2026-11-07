@@ -10,7 +10,7 @@ the `dev.elide:elide-maven-plugin` and set `extensions` to `true`.
         <plugin>
             <groupId>dev.elide</groupId>
             <artifactId>elide-maven-plugin</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <extensions>true</extensions>
         </plugin>
     </plugins>

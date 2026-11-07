@@ -27,7 +27,7 @@ The easiest way to start using Elide in your project is the `elide-maven-plugin`
         <plugin>
             <groupId>dev.elide</groupId>
             <artifactId>elide-maven-plugin</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <extensions>true</extensions>
         </plugin>
     </plugins>
@@ -49,7 +49,7 @@ drop-in replacement. It supports all configuration you would expect from the Kot
         <plugin>
             <groupId>dev.elide</groupId>
             <artifactId>elide-kotlin-maven-plugin</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <extensions>true</extensions>
         </plugin>
     </plugins>
@@ -75,7 +75,7 @@ If you already have a complex project and just want the Elide Java compiler, you
                 <dependency>
                     <groupId>dev.elide</groupId>
                     <artifactId>elide-java-compiler</artifactId>
-                    <version>1.0.0</version>
+                    <version>1.0.1</version>
                 </dependency>
             </dependencies>
             <configuration>
